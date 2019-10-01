@@ -22,7 +22,6 @@ router.get("/", function(req, res) {
       "#description": "description"
     }
   };
-  console.log("Scanning Cars table.");
   docClient.scan(params, onScan);
   function onScan(err, data) {
     if (err) {
@@ -32,13 +31,10 @@ router.get("/", function(req, res) {
       );
     } else {
       res.send(data);
-      // print all the Cars
-      console.log("Scan succeeded.");
-      data.Items.forEach(function(car) {
-        console.log(car.id, car.type, car.name);
-      });
+      // data.Items.forEach(function(car) {
+      //   console.log(car.id, car.type, car.name);
+      // });
       if (typeof data.LastEvaluatedKey != "undefined") {
-        console.log("Scanning for more...");
         params.ExclusiveStartKey = data.LastEvaluatedKey;
         docClient.scan(params, onScan);
       }

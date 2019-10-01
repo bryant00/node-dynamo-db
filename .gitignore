@@ -1,3 +1,5 @@
+dynamodb_local_latest
+
 node_modules
 .npm
 .node_repl_history
